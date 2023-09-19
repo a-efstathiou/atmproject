@@ -11,29 +11,26 @@ public class Main {
         Account account = new Account(); //Account constructor
         Scanner scanner = new Scanner(System.in); //Initialize the scanner
         account.initialize(); //Initializes the account
+        int iteration = 1;
 
-        try {
-            System.out.println("Hello. Please enter you PIN");
-            account.setPin(scanner.nextInt()); //Reads Pin
-            scanner.nextLine();
-        } catch (InputMismatchException e) {
-            System.out.println("ERROR! Enter a 4 digit integer!!");
-            scanner.nextLine();
-            account.setPin(102); /* sets the pin in a wrong way on purpose to continue to the while loop.
-                                    Otherwise, the program would close due to the exception. */
-        }
 
-        while (account.getPinLength(account.getPin()) != 4 ) { //checks if pin is 4 numbers long
+        do {
             try {
-                System.out.println("Please enter a valid PIN. Your PIN needs to be 4 digits");
+                if (iteration == 1) {
+                    System.out.println("Hello. Please enter your PIN");
+                    iteration++;
+                } else {
+                    System.out.println("Your PIN needs to be 4 digits");
+                }
                 account.setPin(scanner.nextInt());
                 scanner.nextLine();
-
+                System.out.println("Please enter the correct PIN");
             } catch (InputMismatchException e) {
                 System.out.println("ERROR! Enter a 4 digit integer!!");
                 scanner.nextLine();
             }
-        }
+        } while(!account.checkPin() || (account.getPinLength(account.getPin()) != 4));//checks if pin is 4 numbers long and if it is 6364
+                                                                                    // which is the default set pin for the account
 
         System.out.println("You have successfully entered your PIN. Proceed.");
 
@@ -83,8 +80,7 @@ public class Main {
                     default:
                         System.out.println("Please enter a number from 1 to 4 \n");
                 }
-            }
-            catch(InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid option \n");
                 scanner.next();
             }
