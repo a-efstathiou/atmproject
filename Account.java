@@ -24,6 +24,10 @@ public class Account {
         return pinString.length(); //returns the length of the PIN
     }
 
+    public boolean checkPin(){
+        return getPin() == 6364;
+    }
+
     public double getBalance(){  //Returns the value of balance.
         return balance;
     }
@@ -36,6 +40,7 @@ public class Account {
 
 
 }
+
 
 
 
